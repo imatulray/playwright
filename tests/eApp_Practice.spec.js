@@ -1,0 +1,44 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://vendor.bflic.com/Login/Login?ReturnUrl=%2f');
+  await page.locator('#UserType').selectOption('A');
+  await page.locator('#Username').click();
+  await page.locator('#Username').fill('123456789B');
+  await page.getByLabel('Password').click();
+  await page.getByLabel('Password').fill('Spring2021!');
+  await page.getByLabel('Password').press('Enter');
+  await page.getByText('508014 - AS EARNED -').click();
+  await page.getByRole('button', { name: 'Go' }).click();
+  await page.getByRole('link', { name: 'New Application' }).click();
+  await page.goto('https://vendor.bflic.com/eAppsRebuild#/get-started');
+  await page.locator('input[name="zipcode"]').click();
+  await page.locator('input[name="zipcode"]').fill('30030');
+  await page.getByLabel('Application State*').selectOption('GEORGIA');
+  await page.locator('.checkmark').first().click();
+  await page.locator('input[name="dateOfBirth"]').click();
+  await page.locator('input[name="dateOfBirth"]').fill('01/01/1950');
+  await page.locator('input[name="effectiveDate"]').click();
+  await page.locator('input[name="effectiveDate"]').fill('05/05/2024');
+  await page.locator('label').filter({ hasText: 'Yes' }).locator('span').click();
+  await page.locator('div:nth-child(3) > .row > div > .form-check-label > .checkmark').first().click();
+  await page.locator('div:nth-child(5) > .row > div > .form-check-label > .checkmark').first().click();
+  await page.locator('input[name="date"]').first().click();
+  await page.locator('input[name="date"]').first().fill('01/01/2018');
+  await page.locator('input[name="date"]').nth(1).click();
+  await page.locator('input[name="date"]').nth(1).fill('01/01/2018');
+  await page.locator('div').filter({ hasText: /^First Name$/ }).getByRole('textbox').click();
+  await page.locator('div').filter({ hasText: /^First Name$/ }).getByRole('textbox').fill('Test');
+  await page.locator('div').filter({ hasText: /^Last Name$/ }).getByRole('textbox').click();
+  await page.locator('div').filter({ hasText: /^Last Name$/ }).getByRole('textbox').fill('App');
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.locator('app-medicare-supplement-product > .plan > div:nth-child(2) > .col-md-12 > div > div > .sub-plan > .row > div:nth-child(4) > .btn').first().click();
+  await page.locator('.radio-align-household > div > .form-check-label > .checkmark').first().click();
+  await page.locator('.row > div:nth-child(2) > .form-check-label > .checkmark').first().click();
+  await page.locator('div:nth-child(3) > div:nth-child(2) > .list-body > .row > div:nth-child(2) > .form-check-label > .checkmark').click();
+  await page.locator('div:nth-child(3) > div:nth-child(4) > .list-body > .row > div:nth-child(2) > .form-check-label > .checkmark').click();
+  await page.locator('div:nth-child(6) > .list-items > .list-body > .row > div:nth-child(2) > .form-check-label > .checkmark').click();
+  await page.getByRole('button', { name: 'Save and Next' }).click();
+
+  await page.pause();
+});
